@@ -1,6 +1,6 @@
 <template>
   <h3
-    class="text-center q-ma-none"
+    class="text-center q-ma-none q-mr-xl"
     id="time"
     v-html="stopWatchStore.getStopwatch"
   ></h3>

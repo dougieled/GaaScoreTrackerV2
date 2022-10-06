@@ -1,7 +1,7 @@
 <template>
-  <h6 class="text-center q-ma-none">
+  <p class="text-subtitle1 text-center q-ma-none q-mb-xs">
     <strong>{{ gameInformationStore.teamInLead }}</strong>
-  </h6>
+  </p>
 </template>
 
 <script setup lang="ts">

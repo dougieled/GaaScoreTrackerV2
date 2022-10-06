@@ -1,16 +1,22 @@
 <template>
-  <div class="row q-col-gutter-md q-mt-sm q-mb-xs">
-    <div class="col-6 q-pt-none text-center q-pr-md">
-      <q-btn outline color="secondary" class="disable-dbl-tap-zoom full-width">
-        Enter Stats
-      </q-btn>
-    </div>
-    <div class="col-6 q-pt-none text-center q-pr-md">
-      <q-btn outline color="secondary" class="disable-dbl-tap-zoom full-width">
-        Enter Stats
-      </q-btn>
-    </div>
+  <div class="col-12 text-center q-pr-md q-mt-sm q-mb-sm">
+    <q-btn outline color="secondary" class="disable-dbl-tap-zoom full-width">
+      Enter Stats
+    </q-btn>
   </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { Team } from 'src/Models/Team';
+import { PropType } from 'vue';
+const props = defineProps({
+  team: {
+    type: Object as PropType<Team>,
+    required: true,
+  },
+  letter: {
+    type: String as PropType<string>,
+    required: true,
+  },
+});
+</script>
 <style></style>

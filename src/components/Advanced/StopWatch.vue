@@ -4,10 +4,10 @@
     :team="gameInformationStore.teamA"
     :timeSince="gameInformationStore.totalTimeSinceTeamAScore"
   />
-  <div class="row items-center">
-    <div class="col-2 text-left">
+  <div class="row items-center q-mt-sm">
+    <div class="text-left" :class="stopWatchStore.started ? 'col-3' : 'col-2'">
       <div class="row">
-        <div class="col-12">
+        <div class="col-6">
           <q-btn
             outline
             square
@@ -35,6 +35,8 @@
             icon="mdi-timer-pause-outline"
           >
           </q-btn>
+        </div>
+        <div class="col-6">
           <q-btn
             outline
             square
@@ -50,7 +52,7 @@
         </div>
       </div>
     </div>
-    <div class="col-8 text-center">
+    <div class="text-left" :class="stopWatchStore.started ? 'col-7' : 'col-8'">
       <div class="row q-col-gutter-xs">
         <div v-if="!stopWatchStore.started" class="col-6">
           <q-select
@@ -93,7 +95,7 @@
     :team="gameInformationStore.teamB"
     :timeSince="gameInformationStore.totalTimeSinceTeamBScore"
   />
-  <div class="col-12">
+  <div class="col-12 border-bottom">
     <team-in-lead v-if="stopWatchStore.started" />
   </div>
   <reset-timer-modal />
@@ -189,9 +191,7 @@ onMounted(() => {
 });
 </script>
 <style>
-.btn-twitter {
-  color: #fff;
-  background-color: #1da1f2;
-  border-color: #1da1f2;
+.border-bottom {
+  border-bottom: 1px solid #fff;
 }
 </style>

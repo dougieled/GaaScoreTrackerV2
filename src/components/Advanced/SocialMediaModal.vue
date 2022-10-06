@@ -1,9 +1,5 @@
 <template>
-  <q-dialog
-    v-model="gameInformationStore.showSocialMediaModal"
-    persistent
-    full-width
-  >
+  <q-dialog v-model="gameInformationStore.showSocialMediaModal" full-width>
     <q-card>
       <q-card-section class="row items-center" @click="openTwitter()">
         <q-avatar

@@ -90,11 +90,13 @@
         </div>
       </div>
     </div>
+    <statistics :letter="props.letter" :team="props.team" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, PropType } from 'vue';
+import Statistics from 'src/components/Advanced/Statistics.vue';
 import { useGameInformationStore } from 'src/stores/game-information-store';
 import { Team } from 'src/Models/Team';
 const gameInformationStore = useGameInformationStore();

@@ -1,11 +1,11 @@
 <template>
-  <div class="col-12">
-    <h6 class="text-center q-ma-none">
+  <div class="col-12 q-mt-xs">
+    <p class="text-center q-ma-none">
       <b>{{ props.team.name }}</b> last Scored:
       <span class="text-danger">
         <b v-html="props.timeSince" />
       </span>
-    </h6>
+    </p>
   </div>
 </template>
 
