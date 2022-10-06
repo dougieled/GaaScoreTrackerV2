@@ -38,7 +38,7 @@
             flat
             :active="menuItem.routeName === route.name"
             :icon="menuItem.icon"
-            size="md"
+            size="sm"
             :color="menuItem.routeName === route.name ? 'teal' : 'grey'"
             :to="{ name: menuItem.routeName }"
             stack

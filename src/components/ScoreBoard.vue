@@ -132,8 +132,4 @@ function updatePoint(isAdd: boolean) {
   setTimeout(() => (updatingScore.value = false), 500);
 }
 </script>
-<style scoped>
-.disable-dbl-tap-zoom {
-  touch-action: manipulation;
-}
-</style>
+<style scoped></style>
