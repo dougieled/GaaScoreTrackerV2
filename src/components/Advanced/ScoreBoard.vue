@@ -24,11 +24,8 @@
                 :loading="updatingScore"
                 :disabled="updatingScore"
                 class="disable-dbl-tap-zoom"
+                icon="mdi-plus"
               >
-                <q-icon v-if="team.goals === 0" name="mdi-plus" dark />
-                <span class="text-weight-bolder text-body1" v-else>{{
-                  team.goals
-                }}</span>
               </q-btn>
             </div>
             <div class="col-12">
@@ -41,14 +38,15 @@
                 :loading="updatingScore"
                 :disabled="updatingScore"
                 class="disable-dbl-tap-zoom"
+                icon="mdi-minus"
               >
-                <q-icon name="mdi-minus" dark />
               </q-btn>
             </div>
           </div>
         </div>
         <div class="col-3 text-center">
-          <h5 class="text-weight-bold q-ma-none">({{ totalScore }})</h5>
+          <h5 class="text-weight-bold q-ma-none">{{ totalScore }}</h5>
+          <p>({{ team.goals }}-{{ team.points }})</p>
         </div>
         <div class="col-4 text-right">
           <div class="row">
@@ -65,11 +63,8 @@
                 :loading="updatingScore"
                 :disabled="updatingScore"
                 class="disable-dbl-tap-zoom"
+                icon="mdi-plus"
               >
-                <q-icon v-if="team.points === 0" name="mdi-plus" dark />
-                <span class="text-weight-bolder text-body1" v-else>{{
-                  team.points
-                }}</span>
               </q-btn>
             </div>
             <div class="col-12">
@@ -82,8 +77,8 @@
                 :loading="updatingScore"
                 :disabled="updatingScore"
                 class="disable-dbl-tap-zoom"
+                icon="mdi-minus"
               >
-                <q-icon name="mdi-minus" dark />
               </q-btn>
             </div>
           </div>

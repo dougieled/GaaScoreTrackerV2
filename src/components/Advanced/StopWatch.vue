@@ -4,7 +4,7 @@
     :team="gameInformationStore.teamA"
     :timeSince="gameInformationStore.totalTimeSinceTeamAScore"
   />
-  <div class="row items-center q-mt-sm q-mb-xs">
+  <div class="row items-center q-mt-sm q-mb-sm">
     <div class="text-left" :class="stopWatchStore.started ? 'col-3' : 'col-2'">
       <div class="row">
         <div class="col-6">
@@ -56,6 +56,19 @@
       <div class="row q-col-gutter-xs">
         <div v-if="!stopWatchStore.started" class="col-6">
           <q-select
+            emit-value
+            dense
+            outlined
+            v-model="stopWatchStore.halfOption"
+            :options="halfOptions"
+            class="q-pb-none"
+            map-options
+            label="Half:"
+            :popup-content-style="{ maxHeight: '300px' }"
+          />
+        </div>
+        <div v-if="!stopWatchStore.started" class="col-6">
+          <q-select
             style="height: 30px"
             emit-value
             dense
@@ -65,19 +78,6 @@
             class="q-pb-none"
             map-options
             label="Start Timer At:"
-            :popup-content-style="{ maxHeight: '300px' }"
-          />
-        </div>
-        <div v-if="!stopWatchStore.started" class="col-6">
-          <q-select
-            emit-value
-            dense
-            outlined
-            v-model="stopWatchStore.halfOption"
-            :options="halfOptions"
-            class="q-pb-none"
-            map-options
-            label="Half:"
             :popup-content-style="{ maxHeight: '300px' }"
           />
         </div>
