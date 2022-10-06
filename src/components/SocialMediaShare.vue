@@ -14,8 +14,8 @@
           encodeURI(gameInformationStore.hashtagString)
         "
         target="_blank"
+        icon="mdi-twitter"
       >
-        <q-icon name="mdi-twitter" dark />
       </q-btn>
     </div>
     <div class="col-12 q-pa-none">
@@ -30,8 +30,8 @@
           encodeURI(gameInformationStore.tweetInformation)
         "
         target="_blank"
+        icon="mdi-whatsapp"
       >
-        <q-icon name="mdi-whatsapp" dark />
       </q-btn>
     </div>
   </div>

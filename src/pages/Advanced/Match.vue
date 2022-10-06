@@ -9,15 +9,15 @@
       </div>
     </div>
     <statistics />
-    <hr class="m-1 mt-2 q-mb-xs" />
+    <hr class="q-mb-sm" />
     <stop-watch />
-    <hr class="m-1 q-mb-sm mt-1" />
+    <hr class="q-mb-sm q-mt-sm" />
   </q-page>
 </template>
 
 <script setup lang="ts">
 import ScoreBoard from 'src/components/Advanced/ScoreBoard.vue';
-import StopWatch from 'src/components/StopWatch.vue';
+import StopWatch from 'src/components/Advanced/StopWatch.vue';
 import { useGameInformationStore } from 'src/stores/game-information-store';
 import Statistics from 'src/components/Advanced/Statistics.vue';
 const gameInformationStore = useGameInformationStore();

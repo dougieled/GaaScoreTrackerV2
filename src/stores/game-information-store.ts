@@ -10,7 +10,8 @@ interface GameInformationStoreStateI {
   teamB: Team,
   totalDateTimeSinceTeamAScore: Date | null,
   totalDateTimeSinceTeamBScore: Date | null,
-  showResetModal: boolean
+  showResetModal: boolean,
+  showSocialMediaModal: boolean
 }
 
 export const useGameInformationStore = defineStore('gameInformationStore', {
@@ -29,7 +30,8 @@ export const useGameInformationStore = defineStore('gameInformationStore', {
     },
     totalDateTimeSinceTeamAScore: null,
     totalDateTimeSinceTeamBScore: null,
-    showResetModal: false
+    showResetModal: false,
+    showSocialMediaModal: false
   }),
   getters: {
     hashtagString(): string {
@@ -111,7 +113,7 @@ export const useGameInformationStore = defineStore('gameInformationStore', {
     },
     minutesInTweet(): string {
       const stopWatchStore = useStopWatchStore()
-      return stopWatchStore.started === true ? ', ' + stopWatchStore.minutes + 'mins' : ''
+      return stopWatchStore.started === true ? ' - ' + stopWatchStore.minutes + 'mins' : ''
     },
     teamInLead(state): string {
       const stopWatchStore = useStopWatchStore()

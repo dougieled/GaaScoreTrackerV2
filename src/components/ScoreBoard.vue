@@ -29,8 +29,8 @@
             :loading="updatingScore"
             :disabled="updatingScore"
             class="q-mb-xs disable-dbl-tap-zoom"
+            icon="mdi-plus"
           >
-            <q-icon name="mdi-plus" dark />
           </q-btn>
         </div>
         <div class="col-12 q-pa-none">
@@ -43,8 +43,8 @@
             :loading="updatingScore"
             :disabled="updatingScore"
             class="disable-dbl-tap-zoom"
+            icon="mdi-minus"
           >
-            <q-icon name="mdi-minus" dark />
           </q-btn>
         </div>
       </div>
@@ -67,8 +67,8 @@
             :loading="updatingScore"
             :disabled="updatingScore"
             class="q-mb-xs disable-dbl-tap-zoom"
+            icon="mdi-plus"
           >
-            <q-icon name="mdi-plus" dark />
           </q-btn>
         </div>
         <div class="col-12 q-pa-none">
@@ -81,8 +81,8 @@
             :loading="updatingScore"
             :disabled="updatingScore"
             class="disable-dbl-tap-zoom"
+            icon="mdi-minus"
           >
-            <q-icon name="mdi-minus" dark />
           </q-btn>
         </div>
       </div>

@@ -13,7 +13,7 @@
           flat
           icon="mdi-restart"
           size="md"
-          color="red"
+          color="red-10"
           class="q-pa-none q-pt-sm"
           @click="openResetModal"
           stack
@@ -39,7 +39,7 @@
             :active="menuItem.routeName === route.name"
             :icon="menuItem.icon"
             size="sm"
-            :color="menuItem.routeName === route.name ? 'teal' : 'grey'"
+            :color="menuItem.routeName === route.name ? 'secondary' : 'grey'"
             :to="{ name: menuItem.routeName }"
             stack
           >

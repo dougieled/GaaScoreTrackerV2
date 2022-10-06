@@ -1,52 +1,49 @@
 <template>
-  <div class="row">
-    <div class="col-12">
-      <time-since-last-score
-        v-if="stopWatchStore.started"
-        :team="gameInformationStore.teamA"
-        :timeSince="gameInformationStore.totalTimeSinceTeamAScore"
-      />
-    </div>
-  </div>
+  <time-since-last-score
+    v-if="stopWatchStore.started"
+    :team="gameInformationStore.teamA"
+    :timeSince="gameInformationStore.totalTimeSinceTeamAScore"
+  />
   <div class="row items-center">
     <div class="col-2 text-left">
       <div class="row">
         <div class="col-12">
           <q-btn
-            small
-            fab
-            dark
-            color="blue darken-2 q-mb-xs"
+            outline
+            square
+            fab-mini
+            color="blue"
             v-if="
               stopWatchStore.started === false ||
               (stopWatchStore.started && stopWatchStore.paused)
             "
             :disabled="gameInformationStore.isTeamInfoNeeded"
+            class="disable-dbl-tap-zoom q-mb-xs"
             @click="start"
-            icon="mdi-timer"
+            icon="mdi-timer-outline"
           >
           </q-btn>
           <q-btn
-            small
+            outline
+            square
+            fab-mini
             v-if="stopWatchStore.started && !stopWatchStore.paused"
-            fab
-            dark
-            color="red darken-2 q-mb-xs"
+            color="orange"
             :disabled="gameInformationStore.isTeamInfoNeeded"
             @click="pause"
+            class="disable-dbl-tap-zoom q-mb-xs"
             icon="mdi-timer-pause-outline"
           >
           </q-btn>
-        </div>
-        <div class="col-12">
           <q-btn
-            small
-            fab
-            dark
-            color="red darken-2"
+            outline
+            square
+            fab-mini
+            color="red"
             v-if="stopWatchStore.started === true"
             :disabled="gameInformationStore.isTeamInfoNeeded"
             @click="stopWatchStore.showTimerResetDialog = true"
+            class="disable-dbl-tap-zoom"
             icon="mdi-refresh"
           >
           </q-btn>
@@ -54,11 +51,12 @@
       </div>
     </div>
     <div class="col-8 text-center">
-      <div class="row">
+      <div class="row q-col-gutter-xs">
         <div v-if="!stopWatchStore.started" class="col-6">
           <q-select
             style="height: 30px"
             emit-value
+            dense
             outlined
             v-model="addedMinutes"
             :options="timerOptions"
@@ -71,6 +69,7 @@
         <div v-if="!stopWatchStore.started" class="col-6">
           <q-select
             emit-value
+            dense
             outlined
             v-model="stopWatchStore.halfOption"
             :options="halfOptions"
@@ -103,10 +102,10 @@
 import { ref, onMounted, computed, watch } from 'vue';
 import { useGameInformationStore } from 'src/stores/game-information-store';
 import { useStopWatchStore } from 'src/stores/stop-watch-store';
-import TimeSinceLastScore from 'src/components/TimeSinceLastScore.vue';
-import Timer from 'src/components/Timer.vue';
-import TeamInLead from 'src/components/TeamInLead.vue';
-import SocialMediaShare from 'src/components/SocialMediaShare.vue';
+import TimeSinceLastScore from 'src/components/Advanced/TimeSinceLastScore.vue';
+import Timer from 'src/components/Advanced/Timer.vue';
+import TeamInLead from 'src/components/Advanced/TeamInLead.vue';
+import SocialMediaShare from 'src/components/Advanced/SocialMediaShare.vue';
 import ResetTimerModal from 'src/components/ResetTimerModal.vue';
 const gameInformationStore = useGameInformationStore();
 const stopWatchStore = useStopWatchStore();
