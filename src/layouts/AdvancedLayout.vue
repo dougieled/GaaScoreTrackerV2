@@ -7,6 +7,7 @@
           src="../assets/gst5050.png"
           height="40"
           width="40"
+          @click="homeOrAdvanced()"
         />
         <q-toolbar-title> GAA Score Tracker </q-toolbar-title>
         <q-btn
@@ -56,12 +57,13 @@
 <script setup lang="ts">
 import ResetDataModal from 'src/components/ResetDataModal.vue';
 import { useGameInformationStore } from 'src/stores/game-information-store';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { ref } from 'vue';
 
 const gameInformationStore = useGameInformationStore();
 
 const route = useRoute();
+const router = useRouter();
 
 const menuList = ref<
   Array<{ icon: string; label: string; routeName: string; separator: boolean }>
@@ -99,6 +101,13 @@ const menuList = ref<
 ]);
 function openResetModal() {
   gameInformationStore.updateShowResetModal(true);
+}
+function homeOrAdvanced() {
+  if (route.name === 'Home') {
+    router.push({ name: 'Match' });
+  } else {
+    router.push({ name: 'Home' });
+  }
 }
 </script>
 <style scoped>

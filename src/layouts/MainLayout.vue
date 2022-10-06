@@ -2,21 +2,25 @@
   <q-layout view="hHh Lpr lff" class="shadow-2 rounded-borders">
     <q-header elevated class="bg-green-7 text-black">
       <q-toolbar>
-        <!-- <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleDrawer"
-        /> -->
         <img
           class="cursor-pointer"
           src="../assets/gst5050.png"
           height="40"
           width="40"
+          @click="homeOrAdvanced()"
         />
         <q-toolbar-title> GAA Score Tracker </q-toolbar-title>
+        <q-btn
+          flat
+          icon="mdi-restart"
+          size="md"
+          color="red-10"
+          class="q-pa-none q-pt-sm"
+          @click="openResetModal"
+          stack
+        >
+          RESET
+        </q-btn>
       </q-toolbar>
     </q-header>
 
@@ -44,17 +48,6 @@
           </q-btn>
           <q-space />
         </template>
-        <q-btn
-          flat
-          icon="mdi-restart"
-          size="md"
-          color="red"
-          active-class="text-baby-blue"
-          @click="openResetModal"
-          stack
-        >
-          RESET
-        </q-btn>
       </q-toolbar>
     </q-footer>
     <reset-data-modal />
@@ -64,11 +57,12 @@
 <script setup lang="ts">
 import ResetDataModal from 'src/components/ResetDataModal.vue';
 import { useGameInformationStore } from 'src/stores/game-information-store';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { ref } from 'vue';
 const gameInformationStore = useGameInformationStore();
 
 const route = useRoute();
+const router = useRouter();
 
 const drawer = ref<boolean>(false);
 
@@ -96,6 +90,13 @@ const menuList = ref<
 ]);
 function openResetModal() {
   gameInformationStore.updateShowResetModal(true);
+}
+function homeOrAdvanced() {
+  if (route.name === 'Home') {
+    router.push({ name: 'Match' });
+  } else {
+    router.push({ name: 'Home' });
+  }
 }
 </script>
 <style scoped>
