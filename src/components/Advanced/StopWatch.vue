@@ -4,7 +4,7 @@
     :team="gameInformationStore.teamA"
     :timeSince="gameInformationStore.totalTimeSinceTeamAScore"
   />
-  <div class="row items-center q-mt-sm">
+  <div class="row items-center q-mt-sm q-mb-xs">
     <div class="text-left" :class="stopWatchStore.started ? 'col-3' : 'col-2'">
       <div class="row">
         <div class="col-6">
