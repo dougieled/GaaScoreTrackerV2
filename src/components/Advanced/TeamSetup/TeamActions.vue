@@ -40,8 +40,9 @@
         outline
         color="info"
         class="disable-dbl-tap-zoom full-width full-height"
+        @click="teamStore.resetTeam()"
       >
-        Edit Team Name
+        Reset Team
       </q-btn>
     </div>
     <div class="col-4 text-center">

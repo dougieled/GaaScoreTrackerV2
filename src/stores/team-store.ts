@@ -34,7 +34,7 @@ export const useTeamStore = defineStore('teamStore', {
         })
         return
       }
-      this.allTeams.push(this.teamASetupDto)
+      this.allTeams.push(team)
       Notify.create({
         color: 'positive', message: 'Team created successfully', icon: 'done'
       })
@@ -47,6 +47,16 @@ export const useTeamStore = defineStore('teamStore', {
       isTeamA ? this.teamASetupDto = team : this.teamBSetupDto = team;
       console.log(this.teamASetupDto)
       this.loadSaveTeamModal = false
+      Notify.create({
+        color: 'positive', message: 'Team loaded', icon: 'done'
+      })
+    },
+    resetTeam() {
+      const isTeamA = this.router.currentRoute.value.name === 'TeamA'
+      isTeamA ? this.teamASetupDto = this.defaultTeamSetupDto : this.teamBSetupDto = this.defaultTeamSetupDto;
+      Notify.create({
+        color: 'positive', message: 'Team reset', icon: 'done'
+      })
     }
   },
   persist: true,
