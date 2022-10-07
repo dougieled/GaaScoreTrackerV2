@@ -99,7 +99,9 @@ module.exports = configure(function (/* ctx */) {
           message: 'Loading. Please wait...'
         },
         notify: {
-          position: 'top-right',
+          position: 'bottom',
+          timeout: 2000
+
         }
       },
 

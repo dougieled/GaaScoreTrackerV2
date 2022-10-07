@@ -17,5 +17,5 @@ import {Loading,AppFullscreen,Notify} from 'quasar'
 
 
 
-export default { config: {"loading":{"spinnerColor":"primary","delay":1000,"message":"Loading. Please wait..."},"notify":{"position":"top-right"}},plugins: {Loading,AppFullscreen,Notify} }
+export default { config: {"loading":{"spinnerColor":"primary","delay":1000,"message":"Loading. Please wait..."},"notify":{"position":"bottom","timeout":2000}},plugins: {Loading,AppFullscreen,Notify} }
 

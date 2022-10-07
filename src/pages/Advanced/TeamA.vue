@@ -1,8 +1,9 @@
 <template>
-  <q-page class="q-pl-sm q-pr-sm q-mt-sm">TEAM A </q-page>
+  <q-page class="q-pl-sm q-pr-sm q-mt-sm">
+    <team-setup />
+  </q-page>
 </template>
 
 <script setup lang="ts">
-import { useGameInformationStore } from 'src/stores/game-information-store';
-const gameInformationStore = useGameInformationStore();
+import TeamSetup from 'src/components/Advanced/TeamSetup/TeamSetup.vue';
 </script>
