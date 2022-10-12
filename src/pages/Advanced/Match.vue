@@ -11,10 +11,12 @@
         <score-board letter="B" />
       </div>
     </div>
+    <statistics-modal />
   </q-page>
 </template>
 
 <script setup lang="ts">
+import StatisticsModal from 'src/components/Advanced/Statistics/StatisticsModal.vue';
 import ScoreBoard from 'src/components/Advanced/ScoreBoard.vue';
 import StopWatch from 'src/components/Advanced/StopWatch.vue';
 </script>

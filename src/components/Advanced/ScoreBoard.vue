@@ -51,7 +51,7 @@
           <h5 class="q-ma-none">
             ({{ teamScore.goals }}-{{ teamScore.points }})
           </h5>
-          <statistics :letter="props.letter" :team="teamScore" />
+          <statistics :letter="props.letter" />
         </div>
         <div class="col-3 text-right">
           <div class="row q-mr-xs">

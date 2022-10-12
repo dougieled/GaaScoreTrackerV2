@@ -33,7 +33,7 @@
           />
         </q-popup-edit>
         <q-popup-edit
-          v-else
+          v-if="routerNameIsTeamB"
           v-model="teamStore.teamBSetupDto.teamName"
           auto-save
           buttons
@@ -124,6 +124,9 @@ const teamStore = useTeamStore();
 const router = useRouter();
 const routerNameIsTeamA = computed(
   () => router.currentRoute.value.name === 'TeamA'
+);
+const routerNameIsTeamB = computed(
+  () => router.currentRoute.value.name === 'TeamB'
 );
 </script>
 <style scoped></style>
