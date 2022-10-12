@@ -47,6 +47,7 @@
         <div class="col-4 text-center">
           <h4 class="text-weight-bold q-ma-none">{{ totalScore }}</h4>
           <h5 class="q-ma-none">({{ team.goals }}-{{ team.points }})</h5>
+          <statistics :letter="props.letter" :team="props.team" />
         </div>
         <div class="col-4 text-right">
           <div class="row q-mr-xs">
@@ -85,7 +86,6 @@
         </div>
       </div>
     </div>
-    <statistics :letter="props.letter" :team="props.team" />
   </div>
 </template>
 
