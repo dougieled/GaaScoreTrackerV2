@@ -2,14 +2,16 @@
   <div class="row">
     <div class="col-12 text-center">
       <h6 class="text-center q-ma-none">
-        <strong>{{ team.name }}</strong>
+        <strong>{{
+          team.teamName ? team.teamName : `Team ${props.letter}`
+        }}</strong>
       </h6>
     </div>
   </div>
   <div class="row">
     <div class="col-12">
-      <div class="row items-center">
-        <div class="col-4 text-left">
+      <div class="row items-end">
+        <div class="col-3 text-left">
           <div class="row">
             <div class="col-12">
               <span class="q-ml-sm">Goals</span>
@@ -44,12 +46,14 @@
             </div>
           </div>
         </div>
-        <div class="col-4 text-center">
+        <div class="col-6 text-center">
           <h4 class="text-weight-bold q-ma-none">{{ totalScore }}</h4>
-          <h5 class="q-ma-none">({{ team.goals }}-{{ team.points }})</h5>
-          <statistics :letter="props.letter" :team="props.team" />
+          <h5 class="q-ma-none">
+            ({{ teamScore.goals }}-{{ teamScore.points }})
+          </h5>
+          <statistics :letter="props.letter" :team="teamScore" />
         </div>
-        <div class="col-4 text-right">
+        <div class="col-3 text-right">
           <div class="row q-mr-xs">
             <div class="col-12">
               <span class="q-mr-sm">Points</span>
@@ -93,27 +97,38 @@
 import { ref, computed, PropType } from 'vue';
 import Statistics from 'src/components/Advanced/Statistics.vue';
 import { useGameInformationStore } from 'src/stores/game-information-store';
-import { Team } from 'src/Models/Team';
+import { useTeamStore } from 'src/stores/team-store';
 const gameInformationStore = useGameInformationStore();
+const teamStore = useTeamStore();
 const updatingScore = ref<boolean>(false);
 const props = defineProps({
-  team: {
-    type: Object as PropType<Team>,
-    required: true,
-  },
   letter: {
     type: String as PropType<string>,
     required: true,
   },
 });
-const totalScore = computed(() => props.team.goals * 3 + props.team.points);
+const team = computed(() => {
+  return props.letter === 'A'
+    ? teamStore.teamASetupDto
+    : teamStore.teamBSetupDto;
+});
+const teamScore = computed(() => {
+  return props.letter === 'A'
+    ? gameInformationStore.teamA
+    : gameInformationStore.teamB;
+});
+const totalScore = computed(
+  () => teamScore.value.goals * 3 + teamScore.value.points
+);
 
 function updateGoal(isAdd: boolean) {
   let updateTeamAction =
     props.letter === 'A'
       ? gameInformationStore.updateTeamAGoals
       : gameInformationStore.updateTeamBGoals;
-  let handleUpdate = isAdd ? props.team.goals + 1 : props.team.goals - 1;
+  let handleUpdate = isAdd
+    ? teamScore.value.goals + 1
+    : teamScore.value.goals - 1;
   if (handleUpdate < 0) return;
   updateTeamAction(handleUpdate);
   updatingScore.value = true;
@@ -125,7 +140,9 @@ function updatePoint(isAdd: boolean) {
       ? gameInformationStore.updateTeamAPoints
       : gameInformationStore.updateTeamBPoints;
 
-  let handleUpdate = isAdd ? props.team.points + 1 : props.team.points - 1;
+  let handleUpdate = isAdd
+    ? teamScore.value.points + 1
+    : teamScore.value.points - 1;
   if (handleUpdate < 0) return;
   updateTeamAction(handleUpdate);
   updatingScore.value = true;

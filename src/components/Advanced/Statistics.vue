@@ -6,17 +6,27 @@
   </div>
 </template>
 <script setup lang="ts">
-import { Team } from 'src/Models/Team';
-import { PropType } from 'vue';
+import { useGameInformationStore } from 'src/stores/game-information-store';
+import { useTeamStore } from 'src/stores/team-store';
+
+import { PropType, computed } from 'vue';
+const gameInformationStore = useGameInformationStore();
+const teamStore = useTeamStore();
 const props = defineProps({
-  team: {
-    type: Object as PropType<Team>,
-    required: true,
-  },
   letter: {
     type: String as PropType<string>,
     required: true,
   },
+});
+const team = computed(() => {
+  return props.letter === 'A'
+    ? teamStore.teamASetupDto
+    : teamStore.teamBSetupDto;
+});
+const teamScore = computed(() => {
+  return props.letter === 'A'
+    ? gameInformationStore.teamA
+    : gameInformationStore.teamB;
 });
 </script>
 <style></style>
