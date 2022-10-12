@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-12">
       <div class="row items-center">
-        <div class="col-4 text-left q-ml-none">
+        <div class="col-4 text-left">
           <div class="row">
             <div class="col-12">
               <span class="q-ml-sm">Goals</span>
@@ -44,12 +44,12 @@
             </div>
           </div>
         </div>
-        <div class="col-3 text-center">
-          <h5 class="text-weight-bold q-ma-none">{{ totalScore }}</h5>
-          <p>({{ team.goals }}-{{ team.points }})</p>
+        <div class="col-4 text-center">
+          <h4 class="text-weight-bold q-ma-none">{{ totalScore }}</h4>
+          <h5 class="q-ma-none">({{ team.goals }}-{{ team.points }})</h5>
         </div>
         <div class="col-4 text-right">
-          <div class="row">
+          <div class="row q-mr-xs">
             <div class="col-12">
               <span class="q-mr-sm">Points</span>
             </div>

@@ -95,7 +95,7 @@
     :team="gameInformationStore.teamB"
     :timeSince="gameInformationStore.totalTimeSinceTeamBScore"
   />
-  <div class="col-12 border-bottom">
+  <div class="col-12">
     <team-in-lead v-if="stopWatchStore.started" />
   </div>
   <reset-timer-modal />
@@ -190,8 +190,4 @@ onMounted(() => {
   checkIfGameIsStarted();
 });
 </script>
-<style>
-.border-bottom {
-  border-bottom: 1px solid #fff;
-}
-</style>
+<style></style>

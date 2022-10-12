@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12 text-center q-pr-md q-mt-sm q-mb-sm">
+  <div class="col-12 text-center q-pr-xs q-mt-sm">
     <q-btn outline color="secondary" class="disable-dbl-tap-zoom full-width">
       Enter Stats
     </q-btn>
