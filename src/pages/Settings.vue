@@ -73,9 +73,11 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useGameInformationStore } from 'src/stores/game-information-store';
+import { useTeamStore } from 'src/stores/team-store';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 const gameInformationStore = useGameInformationStore();
+const teamStore = useTeamStore();
 onMounted(() => {
   bindStateData();
 });
@@ -89,8 +91,8 @@ const selectedHashtag = ref<string>('');
 const hashtagArray = ref<string[]>([]);
 
 function bindStateData() {
-  teamAName.value = gameInformationStore.teamA.name;
-  teamBName.value = gameInformationStore.teamB.name;
+  teamAName.value = teamStore.teamASetupDto.teamName;
+  teamBName.value = teamStore.teamBSetupDto.teamName;
   competitionName.value = gameInformationStore.competition;
   hashtagArray.value = gameInformationStore.hashtagArray;
 }
@@ -106,8 +108,8 @@ function addToArray() {
 function updateSettings() {
   settings.value.validate().then(async (success: boolean) => {
     if (success) {
-      gameInformationStore.updateTeamAName(teamAName.value);
-      gameInformationStore.updateTeamBName(teamBName.value);
+      teamStore.updateTeamAName(teamAName.value);
+      teamStore.updateTeamBName(teamBName.value);
       gameInformationStore.updateCompetitionName(competitionName.value);
       gameInformationStore.updateHashtagArray(hashtagArray.value);
       router.push('/');

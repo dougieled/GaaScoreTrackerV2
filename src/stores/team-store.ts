@@ -13,13 +13,16 @@ interface TeamStoreStateI {
 
 export const useTeamStore = defineStore('teamStore', {
   state: (): TeamStoreStateI => ({
-    teamASetupDto: new TeamSetupDTO(),
-    teamBSetupDto: new TeamSetupDTO(),
+    teamASetupDto: new TeamSetupDTO('Team A'),
+    teamBSetupDto: new TeamSetupDTO('Team B'),
     defaultTeamSetupDto: new TeamSetupDTO(),
     allTeams: [],
     loadSaveTeamModal: false
   }),
   getters: {
+    isTeamInfoNeeded(state): boolean {
+      return !!(state.teamASetupDto.teamName === '' || state.teamBSetupDto.teamName === '')
+    },
     teamByLetter: (state) => (letter: string) => {
       return letter === 'A' ? state.teamASetupDto : state.teamBSetupDto
     },
@@ -64,7 +67,13 @@ export const useTeamStore = defineStore('teamStore', {
     resetTeams() {
       this.teamASetupDto = this.defaultTeamSetupDto
       this.teamBSetupDto = this.defaultTeamSetupDto
-    }
+    },
+    updateTeamAName(data: string) {
+      this.teamASetupDto.teamName = data
+    },
+    updateTeamBName(data: string) {
+      this.teamBSetupDto.teamName = data
+    },
   },
   persist: true,
 });

@@ -1,9 +1,9 @@
 <template>
   <div class="col-12 q-mt-xs">
     <p class="text-center q-ma-none">
-      <b>{{ props.team.name }}</b> last Scored:
+      <b>{{ team.teamName }}</b> last Scored:
       <span class="text-danger">
-        <b v-html="props.timeSince" />
+        <b v-html="timeSince" />
       </span>
     </p>
   </div>
@@ -11,15 +11,25 @@
 
 <script setup lang="ts">
 import { Team } from 'src/Models/Team';
-import { PropType } from 'vue';
+import { useTeamStore } from 'src/stores/team-store';
+import { useGameInformationStore } from 'src/stores/game-information-store';
+import { PropType, computed } from 'vue';
+const gameInformationStore = useGameInformationStore();
+const teamStore = useTeamStore();
 const props = defineProps({
-  team: {
-    type: Object as PropType<Team>,
-    required: true,
-  },
-  timeSince: {
+  letter: {
     type: String as PropType<string>,
     required: true,
   },
+});
+const team = computed(() => {
+  return props.letter === 'A'
+    ? teamStore.teamASetupDto
+    : teamStore.teamBSetupDto;
+});
+const timeSince = computed(() => {
+  return props.letter === 'A'
+    ? gameInformationStore.totalTimeSinceTeamAScore
+    : gameInformationStore.totalTimeSinceTeamBScore;
 });
 </script>

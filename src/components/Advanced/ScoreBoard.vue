@@ -110,8 +110,8 @@ const team = computed(() => {
 });
 const teamScore = computed(() => {
   return props.letter === 'A'
-    ? gameInformationStore.teamA
-    : gameInformationStore.teamB;
+    ? gameInformationStore.teamAScore
+    : gameInformationStore.teamBScore;
 });
 const totalScore = computed(
   () => teamScore.value.goals * 3 + teamScore.value.points

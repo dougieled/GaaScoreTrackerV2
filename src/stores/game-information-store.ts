@@ -1,13 +1,14 @@
 import { defineStore } from 'pinia';
 import { Team } from 'src/Models/Team'
 import { useStopWatchStore } from 'src/stores/stop-watch-store';
+import { useTeamStore } from 'src/stores/team-store'
 
 
 interface GameInformationStoreStateI {
   competition: string
   hashtagArray: string[],
-  teamA: Team,
-  teamB: Team,
+  teamAScore: Team,
+  teamBScore: Team,
   totalDateTimeSinceTeamAScore: Date | null,
   totalDateTimeSinceTeamBScore: Date | null,
   showResetModal: boolean,
@@ -18,13 +19,11 @@ export const useGameInformationStore = defineStore('gameInformationStore', {
   state: (): GameInformationStoreStateI => ({
     competition: 'Test Competition',
     hashtagArray: ['GAAScoreTracker'],
-    teamA: {
-      name: 'Team A',
+    teamAScore: {
       goals: 0,
       points: 0
     },
-    teamB: {
-      name: 'Team B',
+    teamBScore: {
       goals: 0,
       points: 0
     },
@@ -36,9 +35,6 @@ export const useGameInformationStore = defineStore('gameInformationStore', {
   getters: {
     hashtagString(): string {
       return this.hashtagArray.join(',')
-    },
-    isTeamInfoNeeded(state): boolean {
-      return !!(state.teamA.name === '' || state.teamB.name === '')
     },
     totalTimeSinceTeamAScore(state): string {
       const stopWatchStore = useStopWatchStore()
@@ -94,20 +90,21 @@ export const useGameInformationStore = defineStore('gameInformationStore', {
       }
     },
     totalScoreTeamA(state): number {
-      const a = state.teamA.goals * 3
-      const b = state.teamA.points
+      const a = state.teamAScore.goals * 3
+      const b = state.teamAScore.points
       return a + b
     },
     totalScoreTeamB(state): number {
-      const a = state.teamB.goals * 3
-      const b = state.teamB.points
+      const a = state.teamBScore.goals * 3
+      const b = state.teamBScore.points
       return a + b
     },
     tweetInformation(state): string {
+      const teamStore = useTeamStore()
       const stopWatchStore = useStopWatchStore()
-      const teamAScore = `${state.teamA.name} ${state.teamA.goals}:${state.teamA.points
+      const teamAScore = `${teamStore.teamASetupDto.teamName} ${state.teamAScore.goals}:${state.teamAScore.points
         } (${this.totalScoreTeamA})\n`
-      const teamBScore = `${state.teamB.name} ${state.teamB.goals}:${state.teamB.points
+      const teamBScore = `${teamStore.teamBSetupDto.teamName} ${state.teamBScore.goals}:${state.teamBScore.points
         } (${this.totalScoreTeamB})\n`
       return `${state.competition}\n${teamAScore}${teamBScore}${stopWatchStore.halfOption}${this.minutesInTweet}`
     },
@@ -117,6 +114,7 @@ export const useGameInformationStore = defineStore('gameInformationStore', {
     },
     teamInLead(state): string {
       const stopWatchStore = useStopWatchStore()
+      const teamStore = useTeamStore()
       // IF time == FT AET
       if (this.totalScoreTeamA > this.totalScoreTeamB) {
         const difference = this.totalScoreTeamA - this.totalScoreTeamB
@@ -127,9 +125,9 @@ export const useGameInformationStore = defineStore('gameInformationStore', {
           stopWatchStore.halfOption === 'Full Time' ||
           stopWatchStore.halfOption === 'After Extra Time'
         ) {
-          return `${state.teamA.name} won by ${difference} ${points}\n`
+          return `${teamStore.teamASetupDto.teamName} won by ${difference} ${points}\n`
         }
-        return `${state.teamA.name} winning by ${difference} ${points}\n`
+        return `${teamStore.teamASetupDto.teamName} winning by ${difference} ${points}\n`
       }
       if (this.totalScoreTeamB > this.totalScoreTeamA) {
         const difference2 = this.totalScoreTeamB - this.totalScoreTeamA
@@ -139,9 +137,9 @@ export const useGameInformationStore = defineStore('gameInformationStore', {
           stopWatchStore.halfOption === 'Full Time' ||
           stopWatchStore.halfOption === 'After Extra Time'
         ) {
-          return `${state.teamB.name} won by ${difference2} ${points2}\n`
+          return `${teamStore.teamBSetupDto.teamName} won by ${difference2} ${points2}\n`
         }
-        return `${state.teamB.name} winning by ${difference2} ${points2}\n`
+        return `${teamStore.teamBSetupDto.teamName} winning by ${difference2} ${points2}\n`
       }
       return 'All Level. \n'
     }
@@ -154,28 +152,22 @@ export const useGameInformationStore = defineStore('gameInformationStore', {
       this.hashtagArray = data
     },
     updateTeamA(data: Team) {
-      this.teamA = data
-    },
-    updateTeamAName(data: string) {
-      this.teamA.name = data
+      this.teamAScore = data
     },
     updateTeamAGoals(data: number) {
-      this.teamA.goals = data
+      this.teamAScore.goals = data
     },
     updateTeamAPoints(data: number) {
-      this.teamA.points = data
+      this.teamAScore.points = data
     },
     updateTeamB(data: Team) {
-      this.teamB = data
-    },
-    updateTeamBName(data: string) {
-      this.teamB.name = data
+      this.teamBScore = data
     },
     updateTeamBGoals(data: number) {
-      this.teamB.goals = data
+      this.teamBScore.goals = data
     },
     updateTeamBPoints(data: number) {
-      this.teamB.points = data
+      this.teamBScore.points = data
     },
     updateTotalDateTimeSinceTeamAScore(data: Date) {
       this.totalDateTimeSinceTeamAScore = data

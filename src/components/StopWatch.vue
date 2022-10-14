@@ -1,11 +1,7 @@
 <template>
   <div class="row">
     <div class="col-12">
-      <time-since-last-score
-        v-if="stopWatchStore.started"
-        :team="gameInformationStore.teamA"
-        :timeSince="gameInformationStore.totalTimeSinceTeamAScore"
-      />
+      <time-since-last-score v-if="stopWatchStore.started" letter="A" />
     </div>
   </div>
   <div class="row items-center">
@@ -21,7 +17,7 @@
               stopWatchStore.started === false ||
               (stopWatchStore.started && stopWatchStore.paused)
             "
-            :disabled="gameInformationStore.isTeamInfoNeeded"
+            :disabled="teamStore.isTeamInfoNeeded"
             @click="start"
             icon="mdi-timer"
           >
@@ -32,7 +28,7 @@
             fab
             dark
             color="red darken-2 q-mb-xs"
-            :disabled="gameInformationStore.isTeamInfoNeeded"
+            :disabled="teamStore.isTeamInfoNeeded"
             @click="pause"
             icon="mdi-timer-pause-outline"
           >
@@ -45,7 +41,7 @@
             dark
             color="red darken-2"
             v-if="stopWatchStore.started === true"
-            :disabled="gameInformationStore.isTeamInfoNeeded"
+            :disabled="teamStore.isTeamInfoNeeded"
             @click="stopWatchStore.showTimerResetDialog = true"
             icon="mdi-refresh"
           >
@@ -89,11 +85,7 @@
       <social-media-share />
     </div>
   </div>
-  <time-since-last-score
-    v-if="stopWatchStore.started"
-    :team="gameInformationStore.teamB"
-    :timeSince="gameInformationStore.totalTimeSinceTeamBScore"
-  />
+  <time-since-last-score v-if="stopWatchStore.started" letter="A" />
   <div class="col-12">
     <team-in-lead v-if="stopWatchStore.started" />
   </div>
@@ -103,6 +95,7 @@
 import { ref, onMounted, computed, watch } from 'vue';
 import { useGameInformationStore } from 'src/stores/game-information-store';
 import { useStopWatchStore } from 'src/stores/stop-watch-store';
+import { useTeamStore } from 'src/stores/team-store';
 import TimeSinceLastScore from 'src/components/TimeSinceLastScore.vue';
 import Timer from 'src/components/Timer.vue';
 import TeamInLead from 'src/components/TeamInLead.vue';
@@ -110,6 +103,7 @@ import SocialMediaShare from 'src/components/SocialMediaShare.vue';
 import ResetTimerModal from 'src/components/ResetTimerModal.vue';
 const gameInformationStore = useGameInformationStore();
 const stopWatchStore = useStopWatchStore();
+const teamStore = useTeamStore();
 
 const intervalDateTimeNow = ref<number>();
 const halfOptions = ref<{ label: string; value: string }[]>([
@@ -132,11 +126,11 @@ const timerOptions = computed(() => {
   }
   return array;
 });
-const teamA = computed(() => {
-  return gameInformationStore.teamA;
+const teamAScore = computed(() => {
+  return gameInformationStore.teamAScore;
 });
-const teamB = computed(() => {
-  return gameInformationStore.teamB;
+const teamBScore = computed(() => {
+  return gameInformationStore.teamBScore;
 });
 function checkIfGameIsStarted() {
   if (stopWatchStore.started === true) {
@@ -179,10 +173,10 @@ function pause() {
   stopWatchStore.updatePaused(true);
   stopWatchStore.updatePausedAtDateTime(new Date());
 }
-watch([teamA.value], () => {
+watch([teamAScore.value], () => {
   gameInformationStore.updateTotalDateTimeSinceTeamAScore(new Date());
 });
-watch([teamB.value], () => {
+watch([teamBScore.value], () => {
   gameInformationStore.updateTotalDateTimeSinceTeamBScore(new Date());
 });
 onMounted(() => {

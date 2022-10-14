@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12 q-pa-none">
       <q-btn
-        v-if="!gameInformationStore.isTeamInfoNeeded"
+        v-if="!teamStore.isTeamInfoNeeded"
         small
         fab
         dark
@@ -20,7 +20,7 @@
     </div>
     <div class="col-12 q-pa-none">
       <q-btn
-        v-if="!gameInformationStore.isTeamInfoNeeded"
+        v-if="!teamStore.isTeamInfoNeeded"
         small
         fab
         dark
@@ -39,7 +39,9 @@
 
 <script setup lang="ts">
 import { useGameInformationStore } from 'src/stores/game-information-store';
+import { useTeamStore } from 'src/stores/team-store';
 const gameInformationStore = useGameInformationStore();
+const teamStore = useTeamStore();
 </script>
 <style>
 .icon {

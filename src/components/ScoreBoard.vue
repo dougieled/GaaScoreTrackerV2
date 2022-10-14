@@ -7,7 +7,7 @@
     </div>
     <div class="col-8 text-left">
       <h5 class="text-center q-ma-none">
-        <strong>{{ team.name }}</strong>
+        <strong>{{ team.teamName }}</strong>
       </h5>
     </div>
     <div class="col-2 text-right">
@@ -51,7 +51,7 @@
     </div>
     <div class="col-8 text-center">
       <h4 class="text-weight-bold q-mt-none q-mb-none text-center">
-        {{ team.goals }} : {{ team.points }}
+        {{ teamScore.goals }} : {{ teamScore.points }}
       </h4>
       <p class="text-center q-ma-none">Total: {{ totalScore }}</p>
     </div>
@@ -93,27 +93,38 @@
 <script setup lang="ts">
 import { ref, computed, PropType } from 'vue';
 import { useGameInformationStore } from 'src/stores/game-information-store';
+import { useTeamStore } from 'src/stores/team-store';
 import { Team } from 'src/Models/Team';
 const gameInformationStore = useGameInformationStore();
+const teamStore = useTeamStore();
 const updatingScore = ref<boolean>(false);
 const props = defineProps({
-  team: {
-    type: Object as PropType<Team>,
-    required: true,
-  },
   letter: {
     type: String as PropType<string>,
     required: true,
   },
 });
-const totalScore = computed(() => props.team.goals * 3 + props.team.points);
-
+const totalScore = computed(
+  () => teamScore.value.goals * 3 + teamScore.value.points
+);
+const team = computed(() => {
+  return props.letter === 'A'
+    ? teamStore.teamASetupDto
+    : teamStore.teamBSetupDto;
+});
+const teamScore = computed(() => {
+  return props.letter === 'A'
+    ? gameInformationStore.teamAScore
+    : gameInformationStore.teamBScore;
+});
 function updateGoal(isAdd: boolean) {
   let updateTeamAction =
     props.letter === 'A'
       ? gameInformationStore.updateTeamAGoals
       : gameInformationStore.updateTeamBGoals;
-  let handleUpdate = isAdd ? props.team.goals + 1 : props.team.goals - 1;
+  let handleUpdate = isAdd
+    ? teamScore.value.goals + 1
+    : teamScore.value.goals - 1;
   if (handleUpdate < 0) return;
   updateTeamAction(handleUpdate);
   updatingScore.value = true;
@@ -125,7 +136,9 @@ function updatePoint(isAdd: boolean) {
       ? gameInformationStore.updateTeamAPoints
       : gameInformationStore.updateTeamBPoints;
 
-  let handleUpdate = isAdd ? props.team.points + 1 : props.team.points - 1;
+  let handleUpdate = isAdd
+    ? teamScore.value.points + 1
+    : teamScore.value.points - 1;
   if (handleUpdate < 0) return;
   updateTeamAction(handleUpdate);
   updatingScore.value = true;

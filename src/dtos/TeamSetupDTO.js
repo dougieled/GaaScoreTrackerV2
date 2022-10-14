@@ -1,6 +1,6 @@
 export default class TeamSetupDTO {
-  constructor() {
-    this.teamName = '';
+  constructor(teamName = '') {
+    this.teamName = teamName;
     this.players = {
       1: { name: '' },
       2: { name: '' },
