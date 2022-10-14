@@ -15,10 +15,14 @@
 </template>
 
 <script setup lang="ts">
+import { useStatisticStore } from 'src/stores/statistic-store';
+import { useTeamStore } from 'src/stores/team-store';
 import { useGameInformationStore } from 'src/stores/game-information-store';
 import { useStopWatchStore } from 'src/stores/stop-watch-store';
 const gameInformationStore = useGameInformationStore();
 const stopWatchStore = useStopWatchStore();
+const statisticStore = useStatisticStore();
+const teamStore = useTeamStore();
 
 function resetData() {
   gameInformationStore.updateTeamA({ name: 'Team A', goals: 0, points: 0 });
@@ -28,6 +32,8 @@ function resetData() {
   stopWatchStore.updateHalfOption('1st Half');
   stopWatchStore.updateStarted(false);
   gameInformationStore.updateShowResetModal(false);
+  statisticStore.resetStatistics();
+  teamStore.resetTeams();
 }
 </script>
 <style></style>

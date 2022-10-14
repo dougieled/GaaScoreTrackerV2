@@ -46,7 +46,7 @@
         <q-btn
           label="RESET"
           color="secondary"
-          @click="statisticStore.reset()"
+          @click="statisticStore.resetStatisticModal()"
         />
         <q-btn
           label="OK"

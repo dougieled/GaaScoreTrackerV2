@@ -57,7 +57,10 @@ export const useStatisticStore = defineStore('statisticStore', {
     setPlayer(playerName: string) {
       this.selectedPlayer = playerName
     },
-    reset() {
+    resetStatistics() {
+      this.allGameStatistics = []
+    },
+    resetStatisticModal() {
       this.selectedPlayer = ''
       this.statOption = ''
       this.subStatOption = ''
@@ -73,7 +76,7 @@ export const useStatisticStore = defineStore('statisticStore', {
       }
       this.allGameStatistics.push(dto)
       this.showStatisticsModal = false
-      this.reset()
+      this.resetStatisticModal()
     }
   },
   persist: true,

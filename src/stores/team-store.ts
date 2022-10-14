@@ -60,6 +60,10 @@ export const useTeamStore = defineStore('teamStore', {
       Notify.create({
         color: 'positive', message: 'Team reset', icon: 'done'
       })
+    },
+    resetTeams() {
+      this.teamASetupDto = this.defaultTeamSetupDto
+      this.teamBSetupDto = this.defaultTeamSetupDto
     }
   },
   persist: true,
