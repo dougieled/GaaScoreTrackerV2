@@ -1,6 +1,5 @@
 <template>
   <q-btn
-    outline
     square
     fab-mini
     color="secondary"

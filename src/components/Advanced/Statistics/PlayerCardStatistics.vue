@@ -1,62 +1,35 @@
 <template>
-  <q-card class="cursor-pointer full-height">
+  <q-card
+    class="cursor-pointer full-height"
+    :class="
+      statisticStore.selectedPlayer === playerName ||
+      statisticStore.selectedPlayer === props.number.toString()
+        ? 'bg-grey-5'
+        : ''
+    "
+    @click="
+      statisticStore.setPlayer(
+        playerName ? playerName : props.number.toString()
+      )
+    "
+  >
     <q-card-section class="q-pb-xs q-pl-none q-pr-none q-pt-sm">
-      <span style="font-size: 10px">
-        {{
-          routerNameIsTeamA
-            ? teamStore.teamASetupDto.players[props.number].name
-              ? teamStore.teamASetupDto.players[props.number].name
-              : number
-            : teamStore.teamBSetupDto.players[props.number].name
-            ? teamStore.teamBSetupDto.players[props.number].name
-            : number
-        }}
+      <span v-if="playerName" style="font-size: 10px">
+        {{ playerName }}
+      </span>
+      <span v-else style="font-size: 20px">
+        {{ number }}
       </span>
     </q-card-section>
-    <q-popup-edit
-      v-if="routerNameIsTeamA"
-      v-model="teamStore.teamASetupDto.players[props.number].name"
-      auto-save
-      buttons
-      label-set="Update"
-      v-slot="scope"
-    >
-      <slot name="title">Update Player Name</slot>
-      <q-input
-        v-model="scope.value"
-        dense
-        autofocus
-        counter
-        @keyup.enter="scope.set"
-      />
-    </q-popup-edit>
-    <q-popup-edit
-      v-if="routerNameIsTeamB"
-      v-model="teamStore.teamBSetupDto.players[props.number].name"
-      auto-save
-      buttons
-      label-set="Update"
-      v-slot="scope"
-    >
-      <slot name="title">Update Player Name</slot>
-      <q-input
-        v-model="scope.value"
-        dense
-        autofocus
-        counter
-        @keyup.enter="scope.set"
-      />
-    </q-popup-edit>
   </q-card>
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
 import { useTeamStore } from 'src/stores/team-store';
 import { computed } from 'vue';
+import { useStatisticStore } from 'src/stores/statistic-store';
 const teamStore = useTeamStore();
-
-const router = useRouter();
+const statisticStore = useStatisticStore();
 
 const props = defineProps({
   number: {
@@ -64,11 +37,10 @@ const props = defineProps({
     required: true,
   },
 });
-const routerNameIsTeamA = computed(
-  () => router.currentRoute.value.name === 'TeamA'
-);
-const routerNameIsTeamB = computed(
-  () => router.currentRoute.value.name === 'TeamB'
-);
+const playerName = computed(() => {
+  return statisticStore.teamLetter === 'A'
+    ? teamStore.teamASetupDto.players[props.number].name
+    : teamStore.teamBSetupDto.players[props.number].name;
+});
 </script>
 <style scoped></style>

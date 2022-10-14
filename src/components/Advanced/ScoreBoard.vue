@@ -18,7 +18,6 @@
             </div>
             <div class="col-12 q-mb-sm">
               <q-btn
-                outline
                 color="green"
                 square
                 fab
@@ -32,7 +31,6 @@
             </div>
             <div class="col-12">
               <q-btn
-                outline
                 color="red-5"
                 square
                 fab
@@ -60,7 +58,6 @@
             </div>
             <div class="col-12 q-mb-sm">
               <q-btn
-                outline
                 color="green"
                 square
                 fab
@@ -74,7 +71,6 @@
             </div>
             <div class="col-12">
               <q-btn
-                outline
                 color="red-5"
                 square
                 fab

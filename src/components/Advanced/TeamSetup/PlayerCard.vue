@@ -1,16 +1,11 @@
 <template>
   <q-card class="cursor-pointer full-height">
     <q-card-section class="q-pb-xs q-pl-none q-pr-none q-pt-sm">
-      <span style="font-size: 10px">
-        {{
-          routerNameIsTeamA
-            ? teamStore.teamASetupDto.players[props.number].name
-              ? teamStore.teamASetupDto.players[props.number].name
-              : number
-            : teamStore.teamBSetupDto.players[props.number].name
-            ? teamStore.teamBSetupDto.players[props.number].name
-            : number
-        }}
+      <span v-if="playerName" style="font-size: 10px">
+        {{ playerName }}
+      </span>
+      <span v-else style="font-size: 20px">
+        {{ number }}
       </span>
     </q-card-section>
     <q-popup-edit
@@ -70,5 +65,10 @@ const routerNameIsTeamA = computed(
 const routerNameIsTeamB = computed(
   () => router.currentRoute.value.name === 'TeamB'
 );
+const playerName = computed(() => {
+  return routerNameIsTeamA.value
+    ? teamStore.teamASetupDto.players[props.number].name
+    : teamStore.teamBSetupDto.players[props.number].name;
+});
 </script>
 <style scoped></style>

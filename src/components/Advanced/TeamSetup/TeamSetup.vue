@@ -5,7 +5,7 @@
         Enter players names to their corresponding number by tapping on the
         boxes and filling out their names.
       </p>
-      <h6 class="q-mt-none q-mb-none">
+      <h6 class="q-mt-none q-mb-sm">
         {{
           routerNameIsTeamA
             ? teamStore.teamASetupDto.teamName
@@ -15,6 +15,8 @@
             ? teamStore.teamBSetupDto.teamName
             : 'Team B'
         }}
+
+        <q-icon color="positive" name="mdi-pencil-outline" size="sm" />
         <q-popup-edit
           v-if="routerNameIsTeamA"
           v-model="teamStore.teamASetupDto.teamName"
@@ -52,7 +54,7 @@
       </h6>
     </div>
   </div>
-  <div class="row q-col-gutter-sm q-mb-xs" style="height: 8vh">
+  <div class="row q-col-gutter-sm q-mb-sm" style="height: 8vh">
     <div class="col-4 text-center">
       <player-card :number="13" />
     </div>
@@ -63,7 +65,7 @@
       <player-card :number="15" />
     </div>
   </div>
-  <div class="row q-col-gutter-sm q-mb-xs" style="height: 8vh">
+  <div class="row q-col-gutter-sm q-mb-sm" style="height: 8vh">
     <div class="col-4 text-center">
       <player-card :number="10" />
     </div>
@@ -74,7 +76,7 @@
       <player-card :number="12" />
     </div>
   </div>
-  <div class="row q-col-gutter-sm q-mb-xs" style="height: 8vh">
+  <div class="row q-col-gutter-sm q-mb-sm" style="height: 8vh">
     <div class="col-4 offset-2 text-center">
       <player-card :number="8" />
     </div>
@@ -82,7 +84,7 @@
       <player-card :number="9" />
     </div>
   </div>
-  <div class="row q-col-gutter-sm q-mb-xs" style="height: 8vh">
+  <div class="row q-col-gutter-sm q-mb-sm" style="height: 8vh">
     <div class="col-4 text-center">
       <player-card :number="5" />
     </div>
@@ -93,7 +95,7 @@
       <player-card :number="7" />
     </div>
   </div>
-  <div class="row q-col-gutter-sm q-mb-xs" style="height: 8vh">
+  <div class="row q-col-gutter-sm q-mb-sm" style="height: 8vh">
     <div class="col-4 text-center">
       <player-card :number="2" />
     </div>
@@ -104,7 +106,7 @@
       <player-card :number="4" />
     </div>
   </div>
-  <div class="row q-col-gutter-sm q-mb-xs" style="height: 8vh">
+  <div class="row q-col-gutter-sm q-mb-md" style="height: 8vh">
     <div class="col-4 offset-4 text-center">
       <player-card :number="1" />
     </div>

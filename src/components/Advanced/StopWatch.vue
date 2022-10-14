@@ -9,7 +9,6 @@
       <div class="row">
         <div class="col-6">
           <q-btn
-            outline
             square
             fab-mini
             color="blue"
@@ -24,7 +23,6 @@
           >
           </q-btn>
           <q-btn
-            outline
             square
             fab-mini
             v-if="stopWatchStore.started && !stopWatchStore.paused"
@@ -38,7 +36,6 @@
         </div>
         <div class="col-6">
           <q-btn
-            outline
             square
             fab-mini
             color="red"

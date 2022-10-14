@@ -20,6 +20,9 @@ export const useTeamStore = defineStore('teamStore', {
     loadSaveTeamModal: false
   }),
   getters: {
+    teamByLetter: (state) => (letter: string) => {
+      return letter === 'A' ? state.teamASetupDto : state.teamBSetupDto
+    },
   },
   actions: {
     saveTeam() {

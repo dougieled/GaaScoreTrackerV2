@@ -1,7 +1,6 @@
 <template>
   <div class="col-12 text-center q-pr-xs q-mt-sm">
     <q-btn
-      outline
       color="secondary"
       class="disable-dbl-tap-zoom full-width"
       @click="statisticStore.openStatisticsModal(props.letter)"
