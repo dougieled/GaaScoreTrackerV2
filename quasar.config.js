@@ -13,6 +13,7 @@ const { configure } = require('quasar/wrappers');
 
 
 module.exports = configure(function (/* ctx */) {
+  require('dotenv').config()
   return {
     eslint: {
       // fix: true,
@@ -68,7 +69,9 @@ module.exports = configure(function (/* ctx */) {
 
       // publicPath: '/',
       // analyze: true,
-      // env: {},
+      env: {
+        VITE_APP_API_URL: process.env.VITE_APP_API_URL
+      },
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,
@@ -99,7 +102,7 @@ module.exports = configure(function (/* ctx */) {
           message: 'Loading. Please wait...'
         },
         notify: {
-          position: 'bottom',
+          position: 'top',
           timeout: 2000
 
         }

@@ -1,0 +1,12 @@
+version: '3'
+services:
+  gaa-score-tracker:
+    image: gaa-score-tracker-v2
+    environment:
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    env_file:
+      - build/config/environment-variables.env
+    ports:
+      - '80:8080'
