@@ -1,8 +1,12 @@
 import { defineStore } from 'pinia';
 import { useTeamStore } from 'src/stores/team-store';
+import StatisticDTO from 'src/dtos/StatisticDTO';
+import { Statistic } from 'src/Models/Statistic';
+import { useGameInformationStore } from 'src/stores/game-information-store';
+
 interface StatisticStoreStateI {
   showStatisticsModal: boolean,
-  allGameStatistics: { stat: string, subStat: string, player: string, team: string, dateTime: Date }[]
+  allGameStatistics: Statistic[]
   teamLetter: string,
   statOption: string,
   subStatOption: string,
@@ -67,16 +71,31 @@ export const useStatisticStore = defineStore('statisticStore', {
     },
     addStatistic() {
       const teamStore = useTeamStore()
-      const dto = {
-        stat: this.statOption,
-        subStat: this.subStatOption,
-        player: this.selectedPlayer,
-        team: teamStore.teamByLetter(this.teamLetter).teamName,
-        dateTime: new Date()
-      }
+      const dto = new StatisticDTO()
+      dto.stat = this.statOption
+      dto.subStat = this.subStatOption
+      dto.player = this.selectedPlayer
+      dto.teamLetter = this.teamLetter
+      dto.team = teamStore.teamByLetter(this.teamLetter).teamName
+      dto.dateTime = new Date()
+
       this.allGameStatistics.push(dto)
+      this.checkStatisticGoal(dto)
+      this.checkStatisticPoint(dto)
       this.showStatisticsModal = false
       this.resetStatisticModal()
+    },
+    checkStatisticGoal(dto: Statistic) {
+      const gameInformationStore = useGameInformationStore()
+      if (dto.stat !== 'goal') return
+      dto.teamLetter === 'A' ? gameInformationStore.updateTeamAGoals(gameInformationStore.teamAScore.goals + 1) : gameInformationStore.updateTeamBGoals(gameInformationStore.teamBScore.goals + 1)
+
+    },
+    checkStatisticPoint(dto: Statistic) {
+      const gameInformationStore = useGameInformationStore()
+      if (dto.stat !== 'point') return
+      dto.teamLetter === 'A' ? gameInformationStore.updateTeamAPoints(gameInformationStore.teamAScore.points + 1) : gameInformationStore.updateTeamBPoints(gameInformationStore.teamBScore.points + 1)
+
     }
   },
   persist: true,
